@@ -3,6 +3,7 @@ import express from "express";
 import newRecipe from "./endpoints/newRecipe"
 
 import { AddressInfo } from "net";
+import signUp from "./endpoints/signUp";
 import { allowedNodeEnvironmentFlags } from "process";
 import getRecipeById from "./endpoints/getRecipeById";
 
@@ -17,7 +18,10 @@ const server = app.listen(process.env.PORT || 3003, () => {
     } else {
       console.error(`Falha ao inicializar servidor.`)
     }
-  })
+  });
 
-  app.post('/recipe', newRecipe)
-  app.get('/recipe/:id', getRecipeById)
+  // endpoints abaixo:
+
+  app.post('/signup', signUp);
+  app.post('/recipe', newRecipe);
+  app.get('/recipe/:id', getRecipeById);
