@@ -4,7 +4,6 @@ import newRecipe from "./endpoints/newRecipe"
 
 import { AddressInfo } from "net";
 import signUp from "./endpoints/signUp";
-import { allowedNodeEnvironmentFlags } from "process";
 import getRecipeById from "./endpoints/getRecipeById";
 
 dotenv.config();
