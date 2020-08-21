@@ -1,12 +1,11 @@
 import dotenv from "dotenv";
 import express from "express";
 import { AddressInfo } from "net";
-import { allowedNodeEnvironmentFlags } from "process";
-
 import newRecipe from "./endpoints/newRecipe"
 import signUp from "./endpoints/signUp";
 import login from './endpoints/login';
 import getRecipeById from "./endpoints/getRecipeById";
+import followUser from "./endpoints/followUser";
 
 dotenv.config();
 const app = express();
@@ -27,3 +26,4 @@ const server = app.listen(process.env.PORT || 3003, () => {
   app.post('/login', login);
   app.post('/recipe', newRecipe);
   app.get('/recipe/:id', getRecipeById);
+  app.post('/user/follow', followUser);
