@@ -30,4 +30,6 @@ export default class UserDB extends BaseDB{
         .insert({user_id: userId, id_to_follow: idToFollow})
         .into("follow")
     }
+
+    
 }
