@@ -25,8 +25,10 @@ export default class UserDB extends BaseDB{
         return result[0]
     }
 
-    public async followUser(idToFollow: string): Promise<void> {
+    public async followUser(userId: string, idToFollow: string): Promise<void> {
         await this.makeConnection()
+        .insert({user_id: userId, id_to_follow: idToFollow})
+        .into("follow")
     }
     
 }
