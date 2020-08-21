@@ -1,11 +1,11 @@
 import dotenv from "dotenv";
 import express from "express";
-import newRecipe from "./endpoints/newRecipe"
-
 import { AddressInfo } from "net";
+import { allowedNodeEnvironmentFlags } from "process";
+
+import newRecipe from "./endpoints/newRecipe"
 import signUp from "./endpoints/signUp";
 import login from './endpoints/login';
-import { allowedNodeEnvironmentFlags } from "process";
 import getRecipeById from "./endpoints/getRecipeById";
 
 dotenv.config();
