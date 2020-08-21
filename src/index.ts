@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
 import express from "express";
-import newRecipe from "./endpoints/newRecipe"
-
 import { AddressInfo } from "net";
+import newRecipe from "./endpoints/newRecipe"
 import signUp from "./endpoints/signUp";
+import login from './endpoints/login';
 import getRecipeById from "./endpoints/getRecipeById";
 
 dotenv.config();
@@ -17,10 +17,11 @@ const server = app.listen(process.env.PORT || 3003, () => {
     } else {
       console.error(`Falha ao inicializar servidor.`)
     }
-  });
+  })
 
-  // endpoints abaixo:
+// >>>--- EndPoints Bellow ---<<<
 
   app.post('/signup', signUp);
+  app.post('/login', login);
   app.post('/recipe', newRecipe);
   app.get('/recipe/:id', getRecipeById);

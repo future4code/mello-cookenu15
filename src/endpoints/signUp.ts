@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import IdGenerator from '../services/IdGenerator';
 import Authenticator from '../services/Authenticator';
 import UserDB from '../data/UserDatabase';
-import { error } from 'console';
+import { HashManager } from '../services/HashManager';
 
 export default async function signUp(req: Request , res: Response){
     try {
@@ -12,13 +12,13 @@ export default async function signUp(req: Request , res: Response){
         if(!email || !name || !password){
             res.status(400).send({
                 message: "Os campos email, nome e senha são obrigatórios"})
-        } else if(password < 6){
+        } else if(password.length < 6){
             res.status(400).send({
                 message: "A senha precisa ter no mínimo 6 caracteres"
             })
         } else {
-
-            await new UserDB().createUser(id, email, name, password);
+            const encryptedPassword = await new HashManager().hash(password)
+            await new UserDB().createUser(id, email, name, encryptedPassword);
             const token = Authenticator.generateToken({id})
             res.status(200).send({message: 'Usuário criado com sucesso', token})
         }
