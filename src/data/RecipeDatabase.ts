@@ -1,19 +1,19 @@
 import BaseDB from "./BaseDatabase";
-import moment from "moment"
-import IdGenerator from "../services/IdGenerator";
 
 
 export default class RecipeDatabase extends BaseDB {
   public async newRecipe(
+    id: string,
     title: string, 
-    description: string, 
+    description: string,
+    date: string,
     user_id: string
   ): Promise<void> {
     await this.makeConnection().insert({
-      id: IdGenerator.execute(),
+      id,
       title,
       description,
-      date: moment().format("YYYY/MM/DD"),
+      date,
       user_id
     }).into("recipe")
   }
