@@ -5,6 +5,7 @@ import { AddressInfo } from "net";
 
 import getRecipeById from "./endpoints/getRecipeById";
 import userProfile from './endpoints/userProfile';
+import followUser from "./endpoints/followUser";
 import newRecipe from "./endpoints/newRecipe"
 import signUp from "./endpoints/signUp";
 import login from './endpoints/login';
@@ -25,6 +26,7 @@ const server = app.listen(process.env.PORT || 3003, () => {
 
   app.get('/recipe/:id', getRecipeById);
   app.get('/user/profile', userProfile)
+  app.post('/user/follow', followUser);
   app.post('/recipe', newRecipe);
   app.post('/signup', signUp);
   app.post('/login', login);
