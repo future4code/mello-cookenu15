@@ -16,7 +16,7 @@ export default abstract class Authenticator{
      static getTokenData(token: string): any{
         return jwt.verify(
             token,
-            process.env.JWT_KEY as string
+            process.env.JWT_KEY as string 
         )
      }
 }

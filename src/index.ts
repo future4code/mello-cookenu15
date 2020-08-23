@@ -6,6 +6,8 @@ import signUp from "./endpoints/signUp";
 import login from './endpoints/login';
 import getRecipeById from "./endpoints/getRecipeById";
 import followUser from "./endpoints/followUser";
+import unfollowUser from "./endpoints/unfollowUser";
+import getFeed from "./endpoints/getFeed";
 
 dotenv.config();
 const app = express();
@@ -27,3 +29,5 @@ const server = app.listen(process.env.PORT || 3003, () => {
   app.post('/recipe', newRecipe);
   app.get('/recipe/:id', getRecipeById);
   app.post('/user/follow', followUser);
+  app.post('/user/unfollow', unfollowUser);
+  app.get('/user/feed', getFeed)

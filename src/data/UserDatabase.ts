@@ -1,4 +1,5 @@
 import BaseDB from './BaseDatabase';
+import moment from "moment"
 
 export default class UserDB extends BaseDB{
     static tableName = 'user';
@@ -30,5 +31,27 @@ export default class UserDB extends BaseDB{
         .insert({user_id: userId, id_to_follow: idToFollow})
         .into("follow")
     }
-    
+
+    public async unfollowUser(
+        userId: string, 
+        followingId: string
+    ): Promise<void> {
+        await this.makeConnection().raw(`
+            DELETE FROM follow WHERE user_id = "${userId}"
+            AND id_to_follow = "${followingId}";
+        `)
+    } 
+
+    public async getRecipesFeed(): Promise<any> {
+        const feed = await this.makeConnection().raw(`
+            SELECT r.id, r.title, r.description, r.date, u.id, u.name 
+            FROM recipe r JOIN user u WHERE user_id = u.id
+        `)
+        
+        for(const feeds of feed[0]) {
+            feeds.date = moment(feeds.date, "YYYY/MM/DD").format("DD/MM/YYYY")
+        }
+        
+        return feed[0]
+    }
 }
