@@ -1,6 +1,7 @@
 import {Request, Response} from "express"
 import RecipeDatabase from "../data/RecipeDatabase";
 import moment from "moment"
+import BaseDB from "../data/BaseDatabase";
 
 export default async function getRecipeById(req: Request, res: Response): Promise<any> {
   try {
@@ -16,4 +17,5 @@ export default async function getRecipeById(req: Request, res: Response): Promis
   } catch (error) {
     res.status(400).send({message: error.sqlmessage || error.message})
   }
+  BaseDB.destroyConnection()
 }
