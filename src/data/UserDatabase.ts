@@ -24,5 +24,14 @@ export default class UserDB extends BaseDB{
 
         return result[0]
     }
+
+    public async userProfile(id: string): Promise<any> {
+        const result = await this.makeConnection()
+        .select("*")
+        .from(UserDB.tableName)
+        .where({id})
+
+        return result[0]
+    }
     
 }
