@@ -34,6 +34,13 @@ export default class UserDB extends BaseDB{
 
         return result[0]
     }
+
+    public async anotherUser(id: string): Promise<any> {
+        const result = await this.makeConnection()
+        .raw(`SELECT id, name, email FROM ${UserDB.tableName} WHERE id = '${id}'`);
+
+        return result[0]
+    }
       
     public async followUser(userId: string, idToFollow: string): Promise<void> {
         await this.makeConnection()
@@ -60,7 +67,6 @@ export default class UserDB extends BaseDB{
         for(const feeds of feed[0]) {
             feeds.date = moment(feeds.date, "YYYY/MM/DD").format("DD/MM/YYYY")
         }
-        
         return feed[0]
     }
 }

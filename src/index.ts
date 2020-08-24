@@ -5,12 +5,14 @@ import { AddressInfo } from "net";
 
 import getRecipeById from "./endpoints/getRecipeById";
 import unfollowUser from "./endpoints/unfollowUser";
+import anotherUser  from "./endpoints/anotherUser";
 import userProfile from './endpoints/userProfile';
 import followUser from "./endpoints/followUser";
 import newRecipe from "./endpoints/newRecipe";
 import getFeed from "./endpoints/getFeed";
 import signUp from "./endpoints/signUp";
 import login from './endpoints/login';
+
 
 dotenv.config();
 const app = express();
@@ -30,6 +32,7 @@ const server = app.listen(process.env.PORT || 3003, () => {
   app.get('/recipe/:id', getRecipeById);
   app.get('/user/profile', userProfile);
   app.post('/user/follow', followUser);
+  app.get('/user/:id', anotherUser)
   app.get('/user/feed', getFeed);
   app.post('/recipe', newRecipe);
   app.post('/signup', signUp);
